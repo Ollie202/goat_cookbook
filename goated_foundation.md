@@ -1,78 +1,69 @@
 ---
 name: goated-foundation
-description: Build and maintain an agent-ready software project foundation where the repository carries product context, current state, decisions, milestones, issues, evidence, and execution history so coding agents can work autonomously without depending on old chat context.
+description: Build and maintain an agent-ready software project foundation where the repository carries product context, current truth, decisions, milestones, evidence, testing, demo delivery, and execution history so agents can continue coherently without old chat context.
 ---
 
 # Goated Foundation
 
-A reusable operating skill for serious software projects.
+A lean operating system for serious software projects built substantially with coding agents.
 
-The core principle is simple:
+> **Do not make the agent remember the project from chat. Make the repository remember the project.**
 
-> **Do not make the coding agent remember the project from chat. Make the repository remember the project.**
+Use this when starting, restructuring, or continuing a project across many sessions, branches, integrations, milestones, or handoffs.
 
-Use this skill when starting, restructuring, or continuing a project that will be built substantially by coding agents and needs to remain understandable across many sessions, branches, milestones, integrations, and handoffs.
-
-This skill was extracted from the project-management pattern that proved effective while building ProofRail. It is intentionally product-agnostic: copy the operating behavior, not ProofRail's architecture or domain assumptions.
-
-## Desired outcome
-
-A fresh coding agent should be able to enter the repository, read a small set of authoritative files, inspect the code and open work, and answer all of these without reconstructing old conversations:
-
-- What are we building?
-- Why does it exist?
-- What is explicitly out of scope?
-- What is actually working today?
-- What is uncertain or blocked?
-- What should I work on next?
-- What counts as done?
-- Which architectural/security decisions must I preserve?
-- What real evidence proves previous milestones?
-- What actions require owner approval?
-
-If the repository cannot answer those questions, the foundation is incomplete.
+Use `goated_benchmark.md` alongside it to pressure-test **product quality and competitiveness**. Keep dedicated ideation/creative-explosion material separate rather than bloating this operating layer.
 
 ---
 
-## 1. Establish the repository as project memory
+# 1. Desired outcome
 
-Separate stable knowledge, mutable project state, active work, history, and evidence instead of dumping everything into one giant document.
+A fresh agent should be able to enter the repo and answer, without replaying old chats:
 
-A strong default structure is:
+- What are we building and for whom?
+- What is the sharp product thesis?
+- What is explicitly out of scope?
+- What genuinely works today?
+- What is mocked, unknown, blocked, or unproven?
+- What should be worked on next?
+- What counts as done?
+- Which decisions/invariants must be preserved?
+- What evidence proves previous milestones?
+- How is the core path tested?
+- How will the product be demonstrated?
+- What actions require owner approval?
+
+If the repository cannot answer those questions, the project memory is incomplete.
+
+---
+
+# 2. Repository as project memory
+
+Separate stable knowledge, current truth, active work, decisions, research, and evidence. Do not create files merely because a template lists them.
+
+A strong default:
 
 ```text
 project/
 ├── README.md
 ├── AGENTS.md
 ├── PROJECT_STATE.md
-├── CHANGELOG.md
 │
 ├── docs/
-│   ├── vision.md
 │   ├── prd.md
-│   ├── requirements.md
 │   ├── architecture.md
-│   ├── data-model.md
-│   ├── api-contracts.md
 │   ├── integrations.md
 │   ├── security-threat-model.md
 │   ├── testing-strategy.md
-│   ├── deployment-runbook.md
-│   ├── roadmap.md
 │   └── decisions/
 │       └── ADRs...
 │
 ├── planning/
 │   ├── milestones.md
 │   ├── current-sprint.md
-│   ├── backlog.md
-│   ├── risks.md
-│   └── budget.md
+│   └── risks.md
 │
 ├── research/
-│   ├── competitors.md
-│   ├── prior-art.md
-│   └── research-log.md
+│   └── relevant findings...
 │
 └── delivery-or-event-specific/
     ├── requirements-matrix.md
@@ -81,453 +72,477 @@ project/
     └── submission-checklist.md
 ```
 
-Do **not** create every file mechanically. Create only the files that carry real project information. Small projects can collapse sections. Complex or high-stakes projects should preserve the boundaries.
+Collapse sections for small projects. Add files only when they carry information a future human/agent needs to decide, execute, or verify something.
 
-### File responsibilities
+## Core file responsibilities
 
-**README.md**  
-The front door. Explain the product, problem, core workflow, status, setup, and where deeper documentation lives. It should orient a new human quickly, not contain the entire project history.
+**README.md** — front door: problem, thesis, core workflow, status, setup, proof/demo links.
 
-**AGENTS.md**  
-The coding-agent operating contract. Define how agents must start, non-negotiable product and engineering rules, architecture boundaries, definition of done, approval boundaries, documentation discipline, cost/secrets rules, and what they must never claim or invent.
+**AGENTS.md** — behavioral contract: startup routine, non-negotiable rules, approval boundaries, definition of done, architecture constraints.
 
-**PROJECT_STATE.md**  
-The current truth. Record the present phase, what genuinely works, what does not exist yet, current blockers/unknowns, immediate objective, and any kill/rethink criteria. Update it whenever reality changes materially.
+**PROJECT_STATE.md** — current truth only: what works, what does not, current phase, blockers, immediate objective, evidence level.
 
-**docs/**  
-Stable product and technical knowledge: what, why, how, trust/security boundaries, integrations, APIs, testing, deployment, and durable architectural explanations.
+**docs/** — durable product/technical knowledge.
 
-**planning/**  
-Mutable execution state: milestones, current sprint, backlog, risks, and budget. These files should change as work progresses.
+**planning/** — mutable execution state.
 
-**docs/decisions/**  
-Architecture Decision Records. Preserve *why* durable choices were made so a later agent does not "clean up" an intentional constraint.
+**ADRs** — why durable/expensive/security-sensitive decisions were made.
 
-**research/**  
-Durable external learning. Record competitors, prior art, protocol/library discoveries, rejected approaches, and findings that materially affect the build.
+**research/** — external findings that materially influence the build.
 
-**evidence.md or equivalent**  
-Record externally verifiable proof as soon as it exists: transaction hashes, contract addresses, deployment URLs, storage roots, test results, benchmark results, integration IDs, screenshots/demo links, or other real-world evidence. Never fabricate completion evidence.
+**evidence.md** — real proof: tests, benchmark outputs, tx/storage/deployment IDs, URLs, hashes, screenshots, receipts, integration evidence. Never fabricate completion evidence.
+
+**demo-plan.md** — exact path for showing the thesis quickly and reproducibly.
 
 ---
 
-## 2. Make `AGENTS.md` the behavioral root
+# 3. `AGENTS.md` is the behavioral root
 
-`AGENTS.md` should make a fresh agent behave like a continuation of the project rather than a new consultant with its own redesign ideas.
+A fresh agent should behave like a continuation of the project, not a new consultant redesigning it.
 
-At minimum it should contain:
-
-### Mission
-One concise statement of what the project is trying to achieve.
-
-### Mandatory startup routine
-Before meaningful changes, require the agent to:
+Require this startup routine before meaningful work:
 
 1. read `PROJECT_STATE.md`;
 2. read `planning/current-sprint.md`;
-3. read the PRD, architecture, security/trust model, and relevant integration docs;
+3. read PRD, architecture, security/trust and relevant integration docs;
 4. read applicable ADRs;
-5. inspect existing code, open issues, and current PRs before proposing rewrites.
+5. inspect actual code, tests, open issues, PRs and recent commits;
+6. inspect the real competition/user requirements when relevant;
+7. only then decide what needs to change.
 
-### Non-negotiable rules
-Capture project-specific truths that an agent must not reinterpret. Examples:
+Typical non-negotiables:
 
-- do not invent security guarantees;
+- do not invent guarantees;
+- do not present mocks as real integrations;
 - do not silently broaden scope;
-- do not move provider-specific code into a provider-independent core;
-- do not present mocked integrations as real;
-- do not expose or commit secrets;
-- do not spend money, alter production, or make irreversible external changes without the defined approval gate;
-- prefer a narrow working vertical slice over broad unfinished surface area.
-
-### Definition of done
-A feature or milestone is not done because code was written. Require, where applicable:
-
-- implementation matches an explicit requirement;
-- tests cover success and meaningful failure paths;
-- real external integration is proven if the requirement is external;
-- documentation matches implementation reality;
-- evidence is recorded;
-- project state/current sprint are updated;
-- no stronger claim is made than the evidence supports.
-
-This definition is what prevents agents from declaring victory after scaffolding an SDK import or producing a plausible UI.
+- do not redesign settled architecture without evidence;
+- do not expose/commit secrets;
+- do not spend money or perform irreversible external actions outside the defined approval gate;
+- prefer a narrow real vertical slice over broad unfinished surface area;
+- no stronger claim than the evidence supports.
 
 ---
 
-## 3. Separate current truth from future intent
-
-Never let roadmap language become mistaken for implemented reality.
-
-Use this split:
+# 4. Separate truth from intent
 
 ```text
-README / PRD / ROADMAP
-= what the project is and where it intends to go
+PRD / ROADMAP
+= what the project intends to become
 
 PROJECT_STATE
-= what is objectively true right now
+= what is objectively true now
 
 CURRENT_SPRINT
-= what is being worked on next
+= immediate active work
 
 ISSUES
-= bounded executable units with acceptance criteria
+= bounded executable outcomes
 
 PRs
-= proposed implementation and its verification evidence
+= proposed implementation + validation evidence
+
+EVIDENCE
+= what proves the claims
 ```
 
-When an implementation lands, advance the state deliberately. Do not leave stale language saying "planned" after something works, or "complete" after a spike failed.
+Never let roadmap language masquerade as implementation.
 
 ---
 
-## 4. Break the build into proof-oriented milestones
+# 5. Build proof-oriented milestones
 
-Use milestones to reduce risk, not to create management theater.
+A milestone should prove one meaningful capability or retire one meaningful risk.
 
-Each milestone should answer one meaningful question or prove one dependency before later work relies on it.
-
-Bad milestone:
+Bad:
 
 ```text
 M2 — Backend
 ```
 
-Better milestone:
+Good:
 
 ```text
-M2 — Prove external storage round trip
-Outcome: canonical project evidence can be uploaded, retrieved, and verified byte-for-byte through the real provider.
+M2 — Prove real storage round trip
+Outcome: canonical evidence is uploaded through the real provider,
+retrieved again, and verified byte-for-byte.
 ```
 
-Every milestone should have:
+Every milestone should define:
 
-- **Outcome** — the real capability that will exist;
-- **Acceptance criteria** — observable conditions that prove completion;
+- **Outcome** — what becomes genuinely possible;
+- **Acceptance criteria** — observable proof;
 - **Dependencies** — what must already work;
-- **Explicit non-goals** when scope creep is likely;
-- **Evidence requirement** if external systems are involved.
+- **Non-goals** — where scope creep is likely;
+- **Evidence level** — mock/local/external/reproducible;
+- **Demo implication** — what visible moment this milestone enables, if relevant.
 
-Sequence milestones around technical and product risk. Prove the core mechanic before polishing the interface. Prove risky external integrations before building features that assume they work.
+Sequence around risk: prove the core mechanic and risky sponsor/provider integrations before polishing secondary features.
 
 ---
 
-## 5. Turn milestones into GitHub Issues with acceptance contracts
+# 6. Issues are acceptance contracts
 
-Issues should not be vague TODOs. Treat each issue as an executable contract between project intent and agent implementation.
-
-Use this pattern:
+Use issues as bounded contracts, not vague TODOs.
 
 ```markdown
-# <Milestone / task title>
+# <Task / milestone>
 
 ## Objective
-What exact outcome are we trying to prove or deliver?
+Exact outcome.
 
 ## Scope
-- bounded piece of work
-- bounded piece of work
-- bounded piece of work
+- bounded work
 
 ## Acceptance criteria
-- [ ] observable condition
-- [ ] test or failure behavior
-- [ ] external evidence if required
-- [ ] documentation/state updates
+- [ ] observable success condition
+- [ ] meaningful failure condition
+- [ ] real integration proof if required
+- [ ] tests/evidence recorded
+- [ ] demo path updated if behavior changed
+- [ ] project state updated
 
 ## Guardrails
-What must not be changed, mocked, overclaimed, or spent?
+What must not be changed, mocked, overclaimed, spent, or deployed.
 ```
 
-Acceptance criteria should be difficult to game. Prefer:
+Prefer difficult-to-game criteria:
 
-- "real upload succeeds and returned bytes match" over "integrate SDK";
-- "tampered input deterministically fails" over "add verification";
-- "deployment transaction recorded" over "contract is deployable";
-- "tests pass on clean checkout" over "tests added".
-
-When an agent starts work, point it at a specific issue instead of saying "build the project."
+- `real upload + retrieved bytes match` over `integrate SDK`;
+- `tampered input deterministically fails` over `add validation`;
+- `real deployment ID recorded` over `deployable`;
+- `clean-checkout test passes` over `tests added`.
 
 ---
 
-## 6. Use a disciplined issue → branch → PR → merge loop
-
-Default execution lifecycle:
+# 7. Execution loop
 
 ```text
-Milestone / Issue
-      ↓
-working branch
-      ↓
-implementation
-      ↓
-tests + failure checks
-      ↓
-real integration evidence where required
-      ↓
-docs/state updates
-      ↓
-draft PR
-      ↓
-review / CI / fix
-      ↓
-ready PR
-      ↓
-merge
-      ↓
-issue closes
-      ↓
-PROJECT_STATE + current sprint advance
-      ↓
-next issue
+ISSUE
+  ↓
+FOCUSED BRANCH
+  ↓
+IMPLEMENT
+  ↓
+TEST HAPPY + MEANINGFUL FAILURE PATHS
+  ↓
+PROVE REAL INTEGRATION WHERE REQUIRED
+  ↓
+RECORD EVIDENCE
+  ↓
+UPDATE DEMO PATH IF NEEDED
+  ↓
+PR
+  ↓
+REVIEW / CI / FIX
+  ↓
+MERGE
+  ↓
+ISSUE CLOSES
+  ↓
+PROJECT_STATE + SPRINT ADVANCE
 ```
 
-### Branches
-Use focused branches tied to the issue or milestone. Avoid unrelated work on the same branch.
+Do not merge because code looks plausible. Merge when the acceptance contract is actually satisfied.
 
-### Draft PRs
-Open a draft PR when implementation is substantial enough to inspect but the acceptance criteria are not all satisfied. A draft PR is allowed to represent unfinished work honestly.
-
-### PR description
-Every substantive PR should state:
+A substantive PR should state:
 
 - what changed;
 - why;
 - how it was validated;
-- what remains unproven;
+- meaningful failure coverage;
 - real external evidence when relevant;
-- the issue it closes or references.
-
-### Merge gate
-Do not merge simply because code looks plausible. Merge when the issue acceptance criteria are genuinely satisfied and relevant CI/review checks are green.
-
-If an external requirement is still pending, leave the PR draft or clearly incomplete.
+- what remains unproven;
+- linked issue.
 
 ---
 
-## 7. Tests and evidence are the progress meter
+# 8. Tests are claim checks
 
-Do not optimize for vanity test counts. Test the claims the project depends on.
+Do not optimize for vanity test counts.
 
-For each important feature ask:
+For each important product claim ask:
 
 - What must succeed?
 - What must fail?
-- What malformed or missing input matters?
-- What external failure needs structured handling?
-- Which security or trust invariant must never silently degrade?
+- What malformed/missing input matters?
+- What provider/network failure matters?
+- What stale/tampered state matters?
+- Which security/trust invariant must never silently degrade?
+- What must remain deterministic/reproducible?
+- Does the exact demo path have coverage?
 
-A milestone involving an external network/API/provider is **not** complete because mocks pass. Use mocks/unit tests for local behavior, but prove the real path once the milestone requires it.
+Use mocks for fast local behavior, but a milestone that claims a real external integration is not complete until the real path is proven.
 
-Immediately record real evidence in the repository so future agents and submission/release work do not need to rediscover it.
+Prefer a layered test strategy:
 
----
-
-## 8. Use ADRs to protect intentional decisions
-
-Create an ADR when a choice is durable, expensive to reverse, security-sensitive, or likely to be questioned later.
-
-Simple ADR format:
-
-```markdown
-# ADR-00X — Decision title
-
-**Status:** Accepted
-**Date:** YYYY-MM-DD
-
-## Context
-What problem or constraint forced a decision?
-
-## Decision
-What are we choosing?
-
-## Why
-Why is this better than the relevant alternatives?
-
-## Consequences
-What does this make easier, harder, required, or forbidden?
+```text
+unit / deterministic logic
+→ integration / process boundaries
+→ real local vertical slice
+→ real provider/network/hardware proof
+→ golden demo fixture
+→ adversarial/failure fixture
 ```
 
-Do not create ADRs for trivial implementation details. Use them to preserve architectural intent.
+When useful, preserve one **golden fixture** that can reproduce the canonical success path and one meaningful refusal/failure path.
 
 ---
 
-## 9. Promote research into durable project knowledge
+# 9. Failure should improve the system
+
+When a meaningful bug appears:
+
+```text
+FAILURE
+→ GENERAL FAILURE CLASS
+→ INVARIANT
+→ TEST / GUARD / AUDIT / STATE MACHINE
+→ REGRESSION PROTECTION
+```
+
+Do not merely patch the exact symptom if the failure exposes a reusable class of weakness.
+
+Record architectural lessons in an ADR only when the decision is durable; otherwise keep the learning close to the relevant test/docs/code.
+
+---
+
+# 10. Evidence is the real progress meter
+
+Track central claims using a simple ladder:
+
+```text
+E0 — idea
+E1 — code/scaffolding
+E2 — unit/mock proof
+E3 — real local E2E
+E4 — real external/provider/hardware/network proof
+E5 — independently reproducible/verifiable proof
+```
+
+Do not call E2 complete when the requirement is E4.
+
+Record evidence immediately so future agents do not have to rediscover it.
+
+Possible evidence:
+
+- command + raw test result;
+- benchmark fixture/result;
+- deployment/transaction/storage IDs;
+- independently retrieved bytes/hashes;
+- screenshots/video timestamps;
+- provenance/receipt files;
+- provider logs;
+- live URLs;
+- environment/device/version details.
+
+---
+
+# 11. Make demoability a first-class delivery concern
+
+Do not wait until the final day to discover that the strongest engineering cannot be explained in three minutes.
+
+For hackathons and consequential demos, maintain `demo-plan.md` or equivalent as soon as the core thesis is known.
+
+Keep it compact:
+
+```text
+THESIS — one sentence
+HOOK — problem in 10–20 seconds
+INPUT — exact fixture/account/state
+LIVE PATH — minimum clicks/commands proving the core mechanic
+WOW MOMENT — what should stick in memory
+FAILURE PATH — realistic tamper/bad model/provider failure if meaningful
+PROOF — metric + receipt + sponsor evidence
+CLOSE — user value + why sponsor primitive matters
+```
+
+Also record:
+
+- exact commands/URLs needed;
+- expected outputs;
+- reset/setup steps;
+- time budget per segment;
+- fallback recording if live infrastructure dies;
+- what may be cached/prerecorded and how it will be disclosed;
+- final video/submission links once available.
+
+A milestone that materially changes the canonical user flow should update the demo path while the context is fresh.
+
+---
+
+# 12. Build a submission-proof path, not only a product
+
+For competition projects, aim to make the finished work easy to verify:
+
+```text
+README
+  → one-sentence thesis
+  → fastest setup / 60-second verification
+  → live demo + video
+  → benchmark/evidence links
+
+demo-plan
+  → exact judging story
+
+evidence
+  → real outputs and receipts
+
+submission-check
+  → required files
+  → no secrets
+  → links work
+  → licenses/attribution present
+  → final branch/commit known
+```
+
+The README, live app, demo video, benchmark claims, evidence, and submission text should tell the **same story**.
+
+---
+
+# 13. Research must become durable signal
 
 Chat research is temporary unless it changes the repository.
 
-When research materially changes the product, architecture, trust model, integration, scope, or roadmap:
+When research materially changes product, architecture, scope, trust model, integration, testing, or demo strategy:
 
-1. record the durable finding under `research/`;
-2. update the affected product/technical document;
-3. create or update an ADR if a durable decision changed;
-4. update `PROJECT_STATE.md` if current project truth changed;
-5. update issues/milestones if execution must change.
-
-This prevents future agents from repeating already-settled research or resurrecting rejected ideas.
+1. record the durable finding;
+2. update the affected authoritative doc;
+3. create/update an ADR only if a durable decision changed;
+4. update `PROJECT_STATE.md` if current truth changed;
+5. update issues/milestones if execution changed.
 
 Distinguish:
 
-- **fact** — verified external behavior/documentation;
-- **inference** — project conclusion drawn from facts;
-- **decision** — choice the project made;
-- **unknown** — something not yet proven.
+- **fact** — verified external behavior;
+- **inference** — conclusion drawn from facts;
+- **decision** — project choice;
+- **unknown** — not yet proven.
 
-Never promote an unknown into a claim simply because it is convenient for the roadmap.
+Do not promote unknowns into claims.
 
 ---
 
-## 10. Preserve approval boundaries
+# 14. Preserve approval boundaries
 
-Agents should continue autonomously until they reach a real owner boundary, not stop for every small decision.
+Agents should keep moving until they reach a real owner boundary.
 
-Require explicit owner involvement for things such as:
+Typical owner gates:
 
-- credentials or account authorization the agent cannot obtain safely;
+- credentials/account authorization unavailable to the agent;
 - wallet funding or financial spend;
-- production/mainnet deployment when the project defines an approval gate;
+- production/mainnet deployment when explicitly gated;
 - irreversible destructive actions;
-- major product decisions not resolved by existing docs;
-- unavailable infrastructure requiring manual action.
+- major unresolved product decisions.
 
-When blocked, the agent should report exactly:
+When blocked, report exactly:
 
-1. what it needs;
-2. why it needs it;
+1. what is needed;
+2. why;
 3. where the owner must do it;
-4. what secret/private material must **not** be pasted into chat;
-5. what work can resume immediately afterward.
+4. what secret/private material must not be pasted into chat;
+5. what can resume immediately afterward.
 
-Do not ask the owner to manually perform tasks the connected tools can already perform.
-
----
-
-## 11. Keep agents moving, not endlessly planning
-
-A kickoff prompt should tell the implementation agent to read repository authority first, then **execute the current issue**, not return another speculative plan.
-
-The operating rule is:
-
-> Inspect → implement → test → debug → prove → document → PR/merge.
-
-Planning is useful only until the next executable step is clear.
-
-If the repository already contains an accepted plan, agents should not redesign the whole project unless new evidence invalidates it.
+Do not ask the owner to manually do something an available tool can safely perform.
 
 ---
 
-## 12. Maintain a truthful project state after every milestone
+# 15. Keep agents executing, not replanning forever
 
-At milestone completion:
+Default behavior:
 
-1. verify acceptance criteria;
-2. merge the implementation;
-3. confirm the linked issue closes or update it accurately;
-4. update `PROJECT_STATE.md` with what is now genuinely true;
-5. mark completed sprint items;
-6. set the next objective;
-7. record real evidence;
-8. update relevant docs/research/ADR only where reality changed.
+> **Inspect → implement → test → debug → prove → document → demo-check → PR/merge.**
 
-Do not rewrite every document after every PR. Synchronize only the files whose meaning changed.
+Planning ends when the next executable step is clear.
 
-A good `PROJECT_STATE.md` should never require reading ten PRs to understand the present situation.
+If the repository already contains an accepted plan, do not restart ideation or redesign the architecture unless new evidence invalidates it.
 
 ---
 
-## 13. Keep the system lean
-
-This operating system exists to accelerate building, not create documentation work for its own sake.
+# 16. Keep the system lean
 
 Avoid:
 
-- giant `memory.md` dumps;
-- duplicate truth across many files;
-- issues with no acceptance criteria;
-- roadmaps pretending future features already exist;
+- giant memory dumps;
+- duplicate truth across files;
+- documentation no agent reads;
 - stale project-state files;
+- vague issues;
+- fake/placeholder evidence;
+- mocks presented as real;
 - PRs mixing unrelated milestones;
-- fake or placeholder evidence;
-- merging external integrations before proving them live;
-- documentation that no agent ever reads;
-- creating a database, service, token, dashboard, or abstraction simply because the structure has a place for one.
+- speculative infrastructure;
+- huge demo documents;
+- copying every hackathon winner into project docs;
+- creating files purely to satisfy this template.
 
-If a document does not help a future human or agent make a better decision, execute work, preserve a decision, or verify reality, it probably does not belong.
-
----
-
-## 14. Recommended agent startup behavior
-
-When this skill is applied to an existing project, the agent should do the following in order:
-
-1. Inspect repository root, existing docs, issues, PRs, branches, tests, and recent project state.
-2. Do not overwrite a mature existing structure just to match this template.
-3. Identify missing **functions**, not missing filenames: agent rules, current state, architecture, active work, acceptance criteria, evidence, decision history.
-4. Add or refine the minimum documents needed to close those gaps.
-5. Convert the near-term build into bounded proof-oriented milestones.
-6. Create or refine GitHub Issues with explicit acceptance criteria.
-7. Choose the highest-priority unblocked issue.
-8. Implement it on a focused branch.
-9. Run meaningful tests and real integration checks.
-10. Open/update a PR with validation evidence.
-11. Merge only after the completion contract is satisfied.
-12. Update project truth and advance to the next issue.
-
-For a brand-new project, establish enough foundation to prevent agent drift, then begin the first technical milestone quickly. Do not spend days producing documentation before testing the riskiest assumption.
+If a file does not help a future agent **decide, execute, preserve, test, demonstrate, or verify** something, it probably does not belong.
 
 ---
 
-## 15. Quality check
+# 17. Startup behavior for an existing project
 
-The foundation is working when a new agent can enter with a prompt roughly equivalent to:
+1. Inspect repo root, docs, state, tests, issues, PRs, branches and recent commits.
+2. Read the actual rubric/user requirements when relevant.
+3. Preserve mature existing structure; identify missing **functions**, not missing filenames.
+4. Find the sharpest current thesis and highest-risk unproven assumption.
+5. Ensure milestones/issues have observable acceptance criteria and evidence requirements.
+6. Ensure core success and meaningful failure paths are testable.
+7. Ensure there is a compact demo/proof path for consequential delivery.
+8. Choose the highest-priority unblocked issue.
+9. Implement, test, prove, document and PR it.
+10. Merge only when the acceptance contract is satisfied.
+11. Update current truth and continue.
+
+For a brand-new project, create only enough foundation to prevent agent drift, then start proving the riskiest assumption quickly.
+
+---
+
+# 18. Quality check
+
+The foundation is working when a new agent can enter with something close to:
 
 ```text
 Work against this repository.
-Read AGENTS.md, PROJECT_STATE.md, the current sprint, relevant product/architecture/security docs, ADRs, and open issues.
+Read AGENTS.md, PROJECT_STATE.md, current sprint, relevant product/architecture/security/integration docs, ADRs, tests and open issues.
 Treat them as authoritative.
 Continue from the highest-priority active issue.
-Do not redesign settled architecture without new evidence.
-Implement, test, debug, update the relevant project state/evidence, and use a focused PR.
-Stop only at explicit owner/credential/spend/irreversible-action boundaries.
+Preserve settled architecture unless new evidence invalidates it.
+Implement, test both success and meaningful failure paths, prove real integrations where required, record evidence, keep the demo path current, and use a focused PR.
+Stop only at explicit credential/spend/irreversible-action/owner-decision boundaries.
 ```
 
-If that prompt is enough for the agent to continue coherent development without replaying old chats, the repository has become a proper project memory system.
+If that is enough to continue coherent development without replaying old chats, the repository has become proper project memory.
 
 ---
 
-# The Goated Foundation loop
+# Goated Foundation loop
 
 ```text
 IDEA + RESEARCH
       ↓
-VISION / PRD / ARCHITECTURE
+THESIS / PRD / ARCHITECTURE
       ↓
-AGENTS.md defines how agents work
+AGENTS.md = behavior
       ↓
-PROJECT_STATE defines current truth
+PROJECT_STATE = current truth
       ↓
-MILESTONES reduce risk
+MILESTONE = risk/proof target
       ↓
-ISSUE defines a bounded outcome + acceptance criteria
-      ↓
-BRANCH
+ISSUE = acceptance contract
       ↓
 IMPLEMENT
       ↓
-TEST + REAL EVIDENCE
+TEST SUCCESS + FAILURE
       ↓
-PR
+REAL EVIDENCE
       ↓
-REVIEW / FIX
+DEMO/PROOF PATH
       ↓
-MERGE
+PR / REVIEW / MERGE
       ↓
-ISSUE CLOSES
-      ↓
-STATE + SPRINT ADVANCE
+STATE ADVANCES
       ↓
 NEXT ISSUE
 ```
 
-Repeat until the product is real.
+Repeat until the product is real, provable, and easy to demonstrate.
