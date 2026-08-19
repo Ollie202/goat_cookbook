@@ -1,103 +1,71 @@
 ---
 name: goated-benchmark
-description: Benchmark an existing product against reusable patterns observed in strong and winning builds, then identify the highest-leverage improvements without blindly rewriting, bloating, or destabilizing what already works.
+description: Pressure-test an existing product against reusable patterns from strong and winning builds, then identify the highest-leverage improvements without blindly rewriting, bloating, or destabilizing what already works.
 ---
 
 # Goated Benchmark
 
 A reusable benchmark for making products harder to dismiss, easier to understand, more trustworthy, more complete, and more competitive.
 
-This is **not** a template that every product must copy. It is a pressure-test.
+This is **not** a template every product must copy. It is a pressure-test.
 
-The goal is not to turn every project into the same architecture, add unnecessary infrastructure, or destroy a good product chasing a score. The goal is to expose weak claims, shallow integrations, missing proof, weak demos, fragile assumptions, and avoidable gaps before users, judges, investors, reviewers, or production traffic expose them for us.
-
-Use this alongside `goated_foundation.md`:
+Use it alongside `goated_foundation.md`:
 
 - `goated_foundation.md` governs **how the project is organized and executed**.
 - `goated_benchmark.md` governs **how strongly the product itself stands up to scrutiny**.
 
-The core principle is:
+Core principle:
 
 > **Do not ask people to trust an important product claim when the product can prove it instead.**
-
----
-
-# 1. Benchmarking philosophy
-
-When comparing a build against this file:
-
-1. **Preserve what already works.** Do not recommend a rewrite simply because another architecture is fashionable.
-2. **Benchmark claims, not aesthetics alone.** Focus on the reasons a user or judge should believe the product is valuable and works as claimed.
-3. **Prioritize the crux.** Fix the small number of weaknesses that most affect product value, trust, differentiation, judging criteria, or demo quality.
-4. **Do not add complexity for scorekeeping.** A smaller system that proves its core thesis is stronger than a large system full of decorative features.
-5. **Distinguish missing from unnecessary.** A benchmark gap matters only if it strengthens the actual product, rubric, user outcome, or proof.
-6. **Use evidence over confidence.** Prefer reproducible measurements, external state, hashes, receipts, traces, test results, benchmark commands, or real integrations over assertions.
-7. **Treat failures as product research.** Repeated or meaningful failures should become invariants, guards, tests, or explicit product behavior when appropriate.
-8. **Respect project constraints.** Time, cost, solo-builder capacity, sponsor requirements, security, available infrastructure, and deadlines all matter.
 
 The benchmark should make the product better, not merely larger.
 
 ---
 
-# 2. The benchmark loop
+# 1. How to use this benchmark
 
-Use this loop for an existing build:
+When comparing a build against this file:
+
+1. **Preserve what already works.** Do not recommend rewrites because another architecture is fashionable.
+2. **Benchmark claims, not aesthetics alone.** Focus on why a user or judge should believe the product is valuable and works as claimed.
+3. **Prioritize the crux.** Fix the few weaknesses that most affect product value, trust, differentiation, rubric fit, or demo quality.
+4. **Do not add complexity for scorekeeping.** A narrow system that proves its thesis is stronger than a broad system full of decorative features.
+5. **Distinguish missing from unnecessary.** A benchmark gap matters only when fixing it strengthens the real product, requirement, user outcome, or proof.
+6. **Use evidence over confidence.** Prefer measurements, external state, hashes, receipts, traces, test results, benchmark commands, or real integrations over assertions.
+7. **Treat meaningful failures as product research.** Convert recurring failure classes into invariants, guards, tests, audits, or explicit product behavior.
+8. **Respect constraints.** Time, cost, solo-builder capacity, security, sponsor requirements, infrastructure, and deadlines matter.
+
+Default loop:
 
 ```text
-UNDERSTAND THE PRODUCT
-        ↓
+UNDERSTAND PRODUCT + RUBRIC / USER NEED
+                ↓
 IDENTIFY THE CORE CLAIM / CRUX
-        ↓
-READ THE REAL RUBRIC / USER NEED / MARKET REQUIREMENT
-        ↓
-COMPARE CURRENT EVIDENCE AGAINST THE CLAIM
-        ↓
-FIND THE HIGHEST-LEVERAGE GAPS
-        ↓
-IMPROVE WITHOUT DESTROYING WORKING SYSTEMS
-        ↓
-TEST THE HAPPY PATH + ADVERSARIAL PATH
-        ↓
-MEASURE THE RESULT
-        ↓
-RECORD EVIDENCE
-        ↓
-REHEARSE THE STORY / DEMO
-        ↓
+                ↓
+INSPECT WHAT REALLY WORKS TODAY
+                ↓
+COMPARE CLAIMS AGAINST EVIDENCE
+                ↓
+FIND HIGHEST-LEVERAGE GAPS
+                ↓
+IMPROVE WITHOUT DESTROYING STRENGTHS
+                ↓
+TEST HAPPY + MEANINGFUL FAILURE PATHS
+                ↓
+MEASURE + RECORD EVIDENCE
+                ↓
+REHEARSE DEMO / USER STORY
+                ↓
 RE-BENCHMARK
 ```
 
 ---
 
-# 3. First identify the product crux
+# 2. Find the product crux first
 
-Every strong product should have a concise answer to:
+Every strong product should answer:
 
 > **What important problem does this solve better than the obvious alternative?**
-
-Weak crux:
-
-> AI platform for media workflows.
-
-Stronger crux:
-
-> A four-word edit should not force an expensive media pipeline to regenerate every downstream asset.
-
-Weak crux:
-
-> AI ad generator.
-
-Stronger crux:
-
-> Generative models may create the scene, but they must not silently alter the approved product, brand assets, claims, or export provenance.
-
-Weak crux:
-
-> AI operations agent.
-
-Stronger crux:
-
-> A hallucinated diagnosis must not turn directly into a destructive production action.
 
 The crux should be:
 
@@ -107,142 +75,181 @@ The crux should be:
 - important enough that solving it matters;
 - difficult to dismiss as another generic wrapper.
 
-If the product has no identifiable crux, benchmark this before adding more features.
+Examples:
+
+Weak:
+
+> AI media platform.
+
+Stronger:
+
+> A four-word edit should not force an expensive media pipeline to regenerate every downstream asset.
+
+Weak:
+
+> AI ad generator.
+
+Stronger:
+
+> Generative models may create the scene, but they must not silently alter approved products, brand assets, claims, or export provenance.
+
+Weak:
+
+> AI operations agent.
+
+Stronger:
+
+> A hallucinated diagnosis must not turn directly into a destructive production action.
+
+If the product has no clear crux, benchmark that before adding features.
 
 ---
 
-# 4. Rubric-first and requirement-first design
+# 3. Treat the real rubric or requirement as a product requirement
 
-For competitions, hackathons, grants, platform challenges, enterprise pilots, or sponsor builds, treat the real evaluation criteria as a product requirement document.
-
-Before optimizing the build, determine:
+For hackathons, competitions, grants, platform challenges, enterprise pilots, or sponsor builds, determine:
 
 - what is explicitly scored;
 - what is required versus optional;
-- what the sponsor or platform actually wants demonstrated;
 - which capabilities receive the most weight;
 - what must be real rather than mocked;
-- which constraints can disqualify a submission;
-- what evidence a reviewer can independently verify.
+- what can disqualify the submission;
+- what the sponsor/platform actually wants demonstrated;
+- what evidence a reviewer can independently inspect.
 
-Do not merely satisfy a requirement syntactically.
+Do not merely satisfy requirements syntactically.
 
 Bad sponsor integration:
 
 ```text
-Generate artifact → upload artifact to sponsor storage → add sponsor logo
+Generate artifact → upload to sponsor service → add sponsor logo
 ```
 
 Stronger integration:
 
 ```text
-Sponsor capability becomes necessary to the product's correctness,
-performance, trust, economics, execution, or user value.
+Sponsor capability is necessary to the product's
+correctness, performance, trust, economics, execution, or user value.
 ```
 
 Ask:
 
 > **If we removed the sponsor/platform technology, would the product become meaningfully worse or lose an important capability?**
 
-If the answer is no, the integration may be decorative.
+If not, the integration may be decorative.
+
+Examples of naturally load-bearing integrations:
+
+- storage used for integrity/retrieval guarantees rather than merely file hosting;
+- blockchain used for settlement, enforcement, ownership, or verifiable shared state rather than a random hash;
+- an agent framework used for meaningful orchestration, routing, tools, memory, or safety boundaries rather than one API call;
+- local hardware used for measurable latency, privacy, offline, or cost advantages;
+- observability used to detect and prove runtime behavior rather than merely display a dashboard.
+
+Use only what strengthens the actual product.
 
 ---
 
-# 5. Sponsor-native / platform-native architecture
+# 4. Separate generation/reasoning from authority
 
-When a product is built for a specific ecosystem, use the platform where it is naturally load-bearing.
+When AI, agents, automation, or other probabilistic systems are involved, explicitly decide what they may **propose** and what they may **authorize**.
 
-Examples of strong integration patterns:
+Core rule:
 
-- storage used for content-addressed verification, not just file hosting;
-- blockchain used for settlement, enforcement, ownership, or verifiable state, not just writing a random hash on-chain;
-- an agent framework used for meaningful orchestration, routing, tools, memory, or safety boundaries, not merely one API call;
-- local GPU hardware used for a measurable latency, privacy, cost, or offline advantage;
-- an observability platform used to detect and prove actual runtime behavior, not only display a dashboard;
-- a database or vector store used because the product needs durable/queryable state, not because every AI app is expected to have one.
+> **Generating or recommending something is not automatically permission to ship, publish, transfer, deploy, or execute it.**
 
-The correct question is not:
+A useful pattern is:
 
-> How many sponsor features did we use?
+```text
+AI / SYSTEM PROPOSES, GENERATES, CLASSIFIES, OR REASONS
+                         ↓
+DETERMINISTIC CHECK / POLICY / SOURCE-OF-TRUTH VALIDATION
+                         ↓
+AUTHORIZED ACTION / EXPORT / EXECUTION
+```
 
-It is:
+Depending on the product, the authority boundary may be a deterministic check, policy engine, simulation, signature, external state read, human approval, or another mechanism appropriate to the risk.
 
-> Which sponsor capabilities make our product more true, useful, differentiated, or defensible?
+Ask:
+
+- Which outputs may safely be creative?
+- Which values must remain exact?
+- Which actions are irreversible or financially meaningful?
+- Which claims require external grounding?
+- Which decisions require deterministic validation?
+- Which state should be independently re-read rather than trusted from cached application state?
+
+Do not add cryptography, blockchains, consensus, policy engines, or human gates merely because they sound rigorous. Use the simplest boundary that protects the important invariant.
+
+---
+
+# 5. Complete the vertical slice before widening the surface area
+
+Prefer a narrow real system:
+
+```text
+real user input
+→ real core logic
+→ real sponsor/provider integration where required
+→ real persisted/executed result
+→ real failure handling
+→ real evidence
+→ polished demonstration
+```
+
+before adding:
+
+- more dashboards;
+- a huge settings surface;
+- speculative integrations;
+- unsupported future modes;
+- decorative analytics;
+- unnecessary microservices;
+- fake marketplace/community features;
+- enterprise features with no real implementation.
+
+The best additional feature is often the one that makes the existing core claim more undeniable.
 
 ---
 
 # 6. Build for proof, not only the happy path
 
-A demo that only shows success proves very little.
+For the core claim, ask:
 
-For the core product claim, ask:
-
-- What would silently make this claim false?
+- What could silently make this claim false?
 - What failure would fool a user while the UI still looks healthy?
 - What malformed, stale, tampered, delayed, missing, duplicated, or adversarial input matters?
-- What happens when a provider times out?
-- What happens when an external service lies, changes, disappears, or returns partial state?
+- What happens when a provider times out or returns partial state?
 - What happens when the model is confidently wrong?
 - What happens when stored state disagrees with source-of-truth state?
 
-Then build at least one meaningful negative or adversarial demonstration when appropriate.
+When appropriate, build at least one meaningful negative or adversarial demonstration.
 
-A strong demo pattern is:
+Strong demo pattern:
 
 ```text
 1. Show the normal system.
 2. Introduce a realistic failure or tampering event.
-3. Let the output appear deceptively normal if that reflects the real risk.
+3. Let the output appear deceptively normal if that reflects the risk.
 4. Show the system detect the discrepancy.
 5. Show the safe response, fallback, quarantine, refusal, or recovery.
 6. Show the evidence explaining what happened.
 ```
 
-A product that catches an important failure live is often more memorable than one that only generates a successful result.
+A product that catches an important failure live can be more memorable than one that only produces a successful output.
 
 ---
 
-# 7. Bound what AI is allowed to decide
+# 7. Failure → invariant → automated protection
 
-When models are involved, decide explicitly where probabilistic behavior is acceptable and where deterministic guarantees are required.
-
-A useful pattern is:
-
-```text
-AI MAY PROPOSE / GENERATE / CLASSIFY / REASON
-                     ↓
-DETERMINISTIC CHECKS / POLICY / SOURCE-OF-TRUTH VALIDATION
-                     ↓
-SAFE ACTION / EXPORT / EXECUTION
-```
-
-Ask:
-
-- Which outputs may safely be creative?
-- Which values must be copied exactly?
-- Which actions are irreversible?
-- Which decisions require external grounding?
-- Which claims require deterministic validation?
-- Which state must be independently re-read rather than trusted from cached application state?
-
-Do not add cryptography, consensus, blockchains, or elaborate policy engines merely because they sound rigorous. Use the simplest boundary that actually protects the product's important invariant.
-
----
-
-# 8. Failure → invariant → automated protection
-
-When development reveals an important failure, do more than patch the one instance.
-
-Use this conversion:
+Do more than patch meaningful failures once.
 
 ```text
 FAILURE DISCOVERED
       ↓
-WHY COULD THIS HAPPEN?
-      ↓
 GENERAL FAILURE CLASS
       ↓
-PRODUCT / SYSTEM INVARIANT
+SYSTEM / PRODUCT INVARIANT
       ↓
 GUARD, TEST, AUDIT, VALIDATION, OR STATE MACHINE
       ↓
@@ -252,60 +259,52 @@ REGRESSION PROTECTION
 Example:
 
 ```text
-A language renders as empty glyphs
-        ↓
-The selected font does not contain every rendered character
-        ↓
-Invariant: every rendered character must exist in the selected font
-        ↓
-Automated glyph-coverage audit
+Characters render as empty glyphs
+→ selected font lacks required glyphs
+→ invariant: every rendered character must exist in the selected font
+→ automated glyph-coverage audit
 ```
 
-Another example:
+Example:
 
 ```text
 Tests pass but incremental rebuild behavior is wrong
-        ↓
-Two subsystems use incompatible source fingerprints
-        ↓
-Invariant: one canonical fingerprint definition governs reuse decisions
-        ↓
-Cross-system contract test + real scenario benchmark
+→ two subsystems use incompatible fingerprints
+→ invariant: one canonical fingerprint governs reuse
+→ cross-system contract test + real scenario benchmark
 ```
 
-This is how bugs become long-term product quality rather than repeated regressions.
+Bugs should improve the long-term system when they reveal a reusable failure class.
 
 ---
 
-# 9. Replace important trust assumptions with receipts
+# 8. Replace important trust assumptions with inspectable receipts
 
-For each important claim, ask:
+For every important claim, ask:
 
 > **What is the receipt?**
 
-Possible receipts include:
+When practical, successful execution should leave an inspectable artifact showing **what happened, why the system considered it valid, and what evidence supports that conclusion**.
 
-- SHA-256 or content hashes;
-- signed events;
-- transaction hashes;
-- immutable or append-only records;
+A receipt may be:
+
+- content hash;
 - source revision / commit SHA;
-- model ID and revision;
-- deterministic seed;
+- signed event or attestation;
+- transaction hash;
 - execution trace;
-- storage root;
+- storage root or retrieval proof;
 - deployment address;
-- benchmark output;
+- model ID/revision and deterministic seed;
 - audit result;
+- benchmark output;
 - test run;
-- provider response ID;
 - timestamped event history;
+- provenance/export manifest;
 - independently retrievable bytes;
-- provenance manifest;
-- reconciliation result;
-- export manifest.
+- reconciliation result.
 
-Not every app needs cryptographic receipts. The point is to provide the strongest practical evidence appropriate to the claim.
+Not every app needs a cryptographic receipt. Use the strongest practical evidence appropriate to the claim.
 
 Weak:
 
@@ -313,35 +312,35 @@ Weak:
 
 Stronger:
 
-> Verified against source revision `X`, retrieved artifact `Y`, recomputed hash `Z`, and recorded the exact verification result.
+> Verified against source revision `X`, retrieved artifact `Y`, recomputed hash `Z`, and recorded the exact result.
 
 The more important the claim, the less it should depend on a decorative green badge.
 
 ---
 
-# 10. Independently verify important state
+# 9. Independently verify important state
 
-Do not let the same component both make a claim and be the only evidence that the claim is true when independent verification is practical.
+When practical, do not let the same component both make a critical claim and be the only evidence that the claim is true.
 
 Examples:
 
-- do not trust a database row saying an object exists if the product depends on the actual bytes still being present and intact;
-- do not trust a generated report saying deployment succeeded if the chain/provider can be queried directly;
-- do not trust a model to certify its own output when deterministic checks are available;
+- do not trust a database row saying an object exists if the product depends on the actual bytes being present and intact;
+- do not trust a deployment report if the real chain/provider can be queried directly;
+- do not let a model certify its own output when deterministic checks are available;
 - do not trust a UI badge if the underlying state can be re-derived;
-- do not trust a cached artifact if the source-of-truth can be fingerprinted again.
+- do not trust cached state when the source-of-truth can be checked cheaply enough.
 
-A useful design question:
+Ask:
 
 > **If this claim were wrong but every internal status field still said success, how would we catch it?**
 
-If the answer is “we would not,” determine whether the claim is important enough to deserve an independent check.
+If the answer is “we would not,” decide whether the claim is important enough to deserve an independent check.
 
 ---
 
-# 11. Quantify the headline claim
+# 10. Quantify the headline claim and benchmark it fairly
 
-Strong builds turn their core value proposition into a number a reviewer can remember.
+Strong builds turn their core value proposition into a memorable number.
 
 Examples:
 
@@ -359,146 +358,82 @@ Warm run: 45.4s
 0 outbound connections
 ```
 
-```text
-Reference workflow: ~9 hours
-Our workflow: ~2 hours
-```
-
 Good metrics are:
 
-- directly related to the crux;
-- easy to reproduce;
+- directly tied to the crux;
 - measured on the real system;
+- compared with a fair baseline where useful;
 - specific about environment and inputs;
+- reproducible when practical;
 - difficult to inflate with vanity statistics.
 
-Useful categories include:
+Useful categories include latency, cost, throughput, recovery time, provider calls avoided, storage reduction, task completion time, accuracy on a defined test set, user steps removed, local/offline execution, and critical checks passed.
 
-- latency;
-- cost;
-- provider calls avoided;
-- throughput;
-- error rate;
-- recovery time;
-- verification success;
-- deterministic reuse;
-- storage reduction;
-- build time;
-- user steps eliminated;
-- task completion time;
-- accuracy on a defined test set;
-- hardware utilization;
-- offline/private execution;
-- number of critical checks passed.
+Benchmark against the obvious real alternative when possible:
 
-Avoid metrics that sound impressive but do not strengthen the product claim.
+- full regeneration vs dependency-aware regeneration;
+- naive action vs grounded/verified action;
+- cloud vs local execution;
+- manual vs automated workflow;
+- unverified vs independently verified artifact;
+- first run vs cached/incremental run;
+- sponsor reference implementation vs a justified improvement.
 
----
+Do not cherry-pick a deliberately weak baseline.
 
-# 12. Make benchmarks reproducible
-
-A benchmark is stronger when another person or fresh agent can regenerate it.
-
-Prefer:
+For important benchmark claims, preserve:
 
 ```text
 checked-in command / script
-+ fixed or documented fixture
++ documented fixture
 + environment description
 + raw result
 + summarized result
++ caveats
 ```
-
-Avoid manually typing performance numbers into a README without preserving how they were obtained.
-
-For meaningful benchmark claims, record:
-
-- exact command;
-- relevant hardware/software versions;
-- input fixture;
-- warm/cold state when relevant;
-- number of runs;
-- raw output or evidence location;
-- caveats.
 
 Do not fabricate precision.
 
 ---
 
-# 13. Production-readiness should support the thesis
+# 11. Production credibility should support the thesis
 
 Production-readiness is not “add Kubernetes.”
 
-Evaluate only the operational qualities that matter to the actual product:
+Evaluate only operational qualities that matter to the product, such as:
 
-- failure handling;
-- retries and idempotency;
-- observability;
-- reconciliation;
+- failure handling, retries, idempotency;
+- observability and reconciliation;
 - permissions / least privilege;
 - secret handling;
-- durable state;
-- data lifecycle;
+- durable state and data lifecycle;
 - integrity checks;
-- queue/background execution;
-- rate limits;
-- concurrency;
+- rate limits / concurrency;
 - recovery behavior;
 - deployment reproducibility;
 - user-facing error states;
 - safety around irreversible actions.
 
-If the competition explicitly scores production readiness, make these qualities visible in the demo and evidence rather than assuming judges will infer them from the source code.
+If production readiness is explicitly scored, make relevant qualities visible in the demo/evidence rather than assuming judges will infer them from source code.
 
 ---
 
-# 14. Complete the vertical slice before widening the surface area
+# 12. Design the demo as part of the product
 
-A narrower complete system is usually stronger than a giant partially working one.
-
-Prefer:
-
-```text
-real user input
-→ real core logic
-→ real sponsor/provider integration
-→ real persisted/executed result
-→ real failure handling
-→ real evidence
-→ polished demonstration
-```
-
-before adding:
-
-- five additional dashboards;
-- a huge settings surface;
-- ten speculative integrations;
-- unsupported future modes;
-- decorative analytics;
-- unnecessary microservices;
-- fake marketplace/community features;
-- enterprise features with no real implementation.
-
-The best additional feature is often the one that makes the existing core claim more undeniable.
-
----
-
-# 15. Demo design is part of product engineering
-
-A strong product can lose because the demo hides the reason it is strong.
+A strong product can lose because the demo hides why it is strong.
 
 The demo should answer quickly:
 
 1. What problem exists?
 2. Why does the obvious solution fail?
 3. What does our product do differently?
-4. Where is the sponsor/platform capability actually used?
-5. What is the “holy shit” moment?
+4. Where does the sponsor/platform capability matter?
+5. What is the memorable “holy shit” moment?
 6. What measurable result proves the claim?
 7. What happens when something goes wrong?
 8. What evidence remains afterward?
 
-A reliable demo arc is:
+Reliable arc:
 
 ```text
 PROBLEM
@@ -509,7 +444,7 @@ OUR CORE MECHANIC
   ↓
 LIVE SUCCESS
   ↓
-ADVERSARIAL OR FAILURE CASE
+MEANINGFUL FAILURE / ADVERSARIAL CASE
   ↓
 DETECTION / RECOVERY / REFUSAL
   ↓
@@ -520,130 +455,90 @@ RECEIPT / EVIDENCE
 
 Do not spend most of a short demo clicking through navigation.
 
----
-
-# 16. Make the product easy for a judge or reviewer to score
-
-Do not make a reviewer infer that requirements were satisfied.
-
-For competitions, maintain a simple requirements matrix:
+For competitions, maintain a simple requirement map:
 
 | Criterion | Weight | Where implemented | Demo moment | Evidence |
 |---|---:|---|---|---|
-| Example criterion | 30% | `packages/...` | 01:20 | test/URL/hash |
+| Example | 30% | `packages/...` | 01:20 | test/URL/hash |
 
-Before submission, every important scored criterion should have:
-
-- implementation;
-- visible proof;
-- a demo moment;
-- evidence;
-- honest caveats where incomplete.
-
-A judge should be able to award points without reverse-engineering the repository.
+A judge should not have to reverse-engineer the repository to award points.
 
 ---
 
-# 17. Differentiate through engineering, not only features
+# 13. Differentiate through engineering, not only feature count
 
-Many hackathons contain dozens of projects with similar surface features.
+If ten teams use the same models and sponsor SDK, why is this build still memorable?
 
 Differentiation can come from:
 
-- a better problem framing;
+- sharper problem framing;
 - a non-obvious invariant;
 - stronger verification;
-- better failure handling;
-- lower cost;
-- lower latency;
+- better failure handling or recovery;
+- lower cost or latency;
 - local/offline execution;
 - deterministic behavior where others are probabilistic;
-- tighter sponsor integration;
+- deeper sponsor integration;
 - clearer user workflow;
-- better evidence/provenance;
-- stronger interoperability;
+- stronger evidence/provenance;
 - safer execution;
-- better recovery;
 - more complete end-to-end execution.
 
-Ask:
-
-> **If ten other teams use the same models and sponsor SDK, why would our architecture still be memorable?**
+Do not confuse more features with more differentiation.
 
 ---
 
-# 18. Benchmark the obvious alternative
+# 14. Winning-pattern references
 
-Whenever possible, compare against the actual baseline a user would otherwise use.
+These are **reference patterns, not architectures to copy blindly**.
 
-Examples:
+## TakeGraph-style lesson — incremental work + independent correctness
 
-- full regeneration vs dependency-aware regeneration;
-- naive agent action vs grounded/verified action;
-- cloud execution vs local execution;
-- manual workflow vs automated workflow;
-- unverified artifact vs independently verified artifact;
-- first run vs cached/incremental run;
-- sponsor reference implementation vs optimized implementation.
+Observed pattern:
 
-A baseline turns an abstract improvement into a concrete advantage.
-
-Do not cherry-pick a deliberately broken baseline. Use the strongest fair comparison available within the time and evidence constraints.
-
----
-
-# 19. Winning-pattern references
-
-The following examples are **benchmark references, not architectures to copy blindly**. Extract the reusable lesson.
-
-## TakeGraph-style lesson: incremental work + independent correctness
-
-Observed winning pattern:
-
-- model a generation pipeline as dependencies rather than one monolithic run;
-- rebuild only invalidated downstream work;
-- fingerprint inputs and outputs;
-- verify reusable assets against the actual stored bytes;
-- expose machine-readable reasons for reuse/rebuild decisions;
+- model expensive work as dependencies;
+- rebuild only invalidated work;
+- fingerprint inputs/outputs;
+- verify reusable assets against actual stored bytes;
+- expose reasons for reuse/rebuild;
 - demonstrate provider failure and structured recovery;
 - measure avoided work;
-- convert a discovered hashing inconsistency into a canonical invariant and stronger verification.
+- convert discovered fingerprint inconsistency into a canonical invariant.
 
 Reusable lesson:
 
-> **Optimization claims become much stronger when reuse is deterministic, externally checked, measurable, and explainable.**
+> **Optimization claims become stronger when reuse is deterministic, externally checked, measurable, and explainable.**
 
-Do not copy a dependency graph into products that do not need one.
+## Rivet-style lesson — bounded creativity + enforced export boundary
 
-## Rivet-style lesson: bounded creativity + deterministic brand integrity
+Observed pattern:
 
-Observed winning pattern:
-
-- let generative models create the parts where creativity is valuable;
-- prevent them from redrawing exact assets that must remain faithful;
-- deterministically composite approved product/logo/typography assets;
+- let models create where variability is valuable;
+- keep exact approved assets outside the model's creative authority;
 - audit output before export;
-- record lineage, model revision, seeds, timings, and checks;
-- tamper with approved input in the demo and refuse export when hashes disagree;
-- benchmark cold/warm local GPU execution;
+- refuse export when required checks fail;
+- leave a Campaign Receipt showing lineage/checks;
+- tamper with approved input during the demo and detect it;
+- benchmark real local hardware execution;
 - convert real development failures into permanent audits.
 
-Reusable lesson:
+Reusable lessons:
 
-> **Use AI where variability helps; use deterministic controls where correctness matters. Then prove the boundary works.**
+> **Use AI where variability helps; use deterministic controls where correctness matters.**
 
-Do not add hashes or deterministic compositing where the product has no important fidelity requirement.
+> **Generation is not permission to ship. Put an explicit authority boundary before consequential output.**
 
-## Backstop-style lesson: model output is not permission to act
+> **A successful result is stronger when it leaves an inspectable receipt explaining why it was accepted.**
 
-Observed winning pattern:
+## Backstop-style lesson — reasoning is not permission to act
+
+Observed pattern:
 
 - AI proposes diagnosis/action;
 - real infrastructure signals ground the diagnosis;
 - guardrails verify whether execution is allowed;
 - unsafe or hallucinated actions are blocked/rerouted;
-- the demo intentionally introduces a bad model conclusion;
-- the system shows why naive direct execution would be dangerous.
+- the demo intentionally introduces a bad model conclusion.
 
 Reusable lesson:
 
@@ -651,92 +546,78 @@ Reusable lesson:
 
 ## On-chain enforcement-style lesson
 
-Observed winning pattern:
-
-- AI or software helps structure a decision;
-- funds/state/rights are enforced by an external deterministic system;
-- the resulting action leaves an independently inspectable record.
-
 Reusable lesson:
 
 > **Use decentralized infrastructure when independent enforcement or verifiable shared state is part of the product, not as decorative provenance.**
 
 ## Cross-source integrity-style lesson
 
-Observed winning pattern:
-
-- do not trust one source of operational truth;
-- compare agent logs, source control, CI, external services, or runtime state;
-- derive a result from multiple independent signals.
-
 Reusable lesson:
 
-> **When any one evidence source can lie or drift, cross-verification can turn weak telemetry into a stronger integrity claim.**
+> **When one evidence source can lie or drift, cross-verification can turn weak telemetry into a stronger integrity claim.**
 
 ---
 
-# 20. The Goated Benchmark scorecard
+# 15. Goated Benchmark scorecard — 100 points
 
-Score only dimensions that materially apply to the product. Mark irrelevant dimensions `N/A`; do not invent work solely to gain points.
-
-A useful default score is 100 points.
+Score only dimensions that materially apply. Mark irrelevant dimensions `N/A`; do not invent work solely to gain points.
 
 ## A. Problem + crux — 10
 
-- 0–3: generic problem, unclear user pain.
+- 0–3: generic problem / unclear user pain.
 - 4–6: real problem but weak differentiation.
-- 7–8: sharp, demonstrable product thesis.
-- 9–10: memorable crux tied directly to meaningful user value.
+- 7–8: sharp, demonstrable thesis.
+- 9–10: memorable crux tied directly to meaningful value.
 
 ## B. Requirement / rubric fit — 10
 
 - 0–3: major requirements unknown or weakly addressed.
-- 4–6: requirements mostly satisfied but hard to verify.
-- 7–8: strong direct mapping from requirements to implementation.
-- 9–10: product and demo make the highest-value criteria undeniable.
+- 4–6: mostly satisfied but hard to verify.
+- 7–8: strong mapping from requirements to implementation.
+- 9–10: highest-value criteria are undeniable in product and demo.
 
-For non-competition products, substitute actual customer, market, regulatory, or operational requirements.
+For non-competition products, use actual customer, market, regulatory, or operational requirements.
 
 ## C. Core vertical-slice completeness — 10
 
 - 0–3: prototype/scaffolding only.
-- 4–6: core path works with gaps or mocks.
+- 4–6: core path works with gaps/mocks.
 - 7–8: real end-to-end core path works.
-- 9–10: end-to-end path plus meaningful failure behavior and recovery are proven.
+- 9–10: end-to-end path plus meaningful failure behavior/recovery proven.
 
 ## D. Integration depth — 10
 
-- 0–3: decorative or superficial integration.
-- 4–6: useful but replaceable integration.
-- 7–8: platform meaningfully improves the product.
-- 9–10: platform capability is load-bearing to product value/correctness/performance/trust.
+- 0–3: decorative integration.
+- 4–6: useful but replaceable.
+- 7–8: platform materially improves the product.
+- 9–10: platform is load-bearing to value, correctness, performance, or trust.
 
 ## E. Evidence + verifiability — 10
 
 - 0–3: claims mostly asserted.
-- 4–6: tests/logs exist but key claims remain self-reported.
+- 4–6: tests/logs exist but central claims remain self-reported.
 - 7–8: important claims have real evidence.
-- 9–10: critical claims can be independently reproduced or verified.
+- 9–10: critical claims are independently reproducible or verifiable.
 
 ## F. Failure / adversarial resilience — 10
 
 - 0–3: happy path only.
 - 4–6: basic errors handled.
 - 7–8: meaningful failure classes tested.
-- 9–10: adversarial demo proves the core safety/correctness mechanism under realistic failure.
+- 9–10: realistic adversarial proof demonstrates the core protection/recovery mechanism.
 
 ## G. Measurable advantage — 10
 
 - 0–3: value is qualitative only.
-- 4–6: some metrics but weak baseline/reproducibility.
-- 7–8: strong headline metric tied to product crux.
+- 4–6: metrics exist but baseline/reproducibility is weak.
+- 7–8: strong headline metric tied to the crux.
 - 9–10: fair baseline + reproducible benchmark + memorable improvement.
 
 ## H. Engineering / production credibility — 10
 
 - 0–3: fragile demo code.
 - 4–6: reasonable implementation with obvious operational gaps.
-- 7–8: appropriate tests, state handling, observability, permissions, recovery, or deployment discipline.
+- 7–8: appropriate testing/state/permissions/recovery/deployment discipline.
 - 9–10: production qualities directly support the thesis and are visibly proven.
 
 ## I. Demo clarity + memorability — 10
@@ -744,32 +625,32 @@ For non-competition products, substitute actual customer, market, regulatory, or
 - 0–3: difficult to understand or navigation-heavy.
 - 4–6: understandable but generic.
 - 7–8: clear problem → mechanism → result story.
-- 9–10: strong live proof/adversarial moment + memorable metric + clear evidence.
+- 9–10: memorable proof/failure moment + metric + clear evidence.
 
 ## J. Scope discipline + differentiation — 10
 
 - 0–3: bloated, scattered, or indistinguishable.
-- 4–6: useful but too broad or generic.
-- 7–8: focused build with recognizable technical/product identity.
-- 9–10: every major feature strengthens the core thesis and the product remains distinct even among similar SDK/model choices.
+- 4–6: useful but too broad/generic.
+- 7–8: focused build with recognizable identity.
+- 9–10: every major feature strengthens the thesis and the product stays distinct among similar SDK/model choices.
 
-### Score interpretation
+Score interpretation:
 
 ```text
 90–100  Exceptional benchmark strength. Focus on polish, evidence gaps, and submission execution.
 80–89   Strong. Fix the few gaps that most affect the crux or rubric.
 70–79   Competitive but vulnerable. Several high-leverage weaknesses remain.
 60–69   Functional build, weak competitive proof. Prioritize aggressively.
-<60     Do not add random features. Revisit the crux, vertical slice, proof, and requirement fit.
+<60     Revisit the crux, vertical slice, proof, and requirement fit before adding features.
 ```
 
-Do not worship the total. A 92 with a fatal missing requirement can still lose. A 78 with an extraordinary crux and demo can outperform a mechanically scored 90.
+Do not worship the total. A high score with a fatal missing requirement can still lose.
 
 ---
 
-# 21. Evidence grades
+# 16. Evidence grades
 
-When benchmarking a claim, classify the evidence level.
+Classify important claims honestly:
 
 ```text
 E0 — Idea only
@@ -780,17 +661,17 @@ E4 — Real external/provider/hardware/network proof
 E5 — Independently reproducible/verifiable proof
 ```
 
-For the product's central claims, aim for the highest practical evidence grade before submission or release.
+For central claims, aim for the highest practical evidence grade before submission/release.
 
-Do not describe an E2 integration as if it were E4.
+Do not describe E2 as E4.
 
 ---
 
-# 22. Gap prioritization
+# 17. Gap prioritization
 
-After scoring, do **not** start implementing every low-scoring item.
+Do **not** implement every low-scoring item.
 
-Rank gaps by:
+Use this mental model:
 
 ```text
 Priority = Impact × Relevance × Evidence Gain × Demo Value
@@ -798,39 +679,31 @@ Priority = Impact × Relevance × Evidence Gain × Demo Value
                     Cost × Risk × Scope Creep
 ```
 
-You do not need literal arithmetic. Use the model to force prioritization.
-
 Prefer work that:
 
-- fixes a high-weight rubric gap;
+- fixes a high-weight requirement/rubric gap;
 - proves the core thesis;
 - turns a claim into evidence;
 - creates a memorable demo moment;
 - addresses a realistic failure;
-- deepens a sponsor-native integration;
-- produces a measurable result;
+- deepens a load-bearing integration;
+- produces a meaningful metric;
 - completes the vertical slice.
 
 Deprioritize work that:
 
-- only increases feature count;
+- merely increases feature count;
 - creates infrastructure with no user/judge value;
 - rewrites stable components without a proven reason;
 - adds speculative scale before the core flow works;
 - makes the demo longer without making the thesis clearer;
-- introduces a new dependency merely to look sophisticated.
+- introduces dependencies just to look sophisticated.
 
 ---
 
-# 23. Benchmark report format for agents
+# 18. Benchmark report format for agents
 
-When asked:
-
-```text
-Compare our current build against goated_benchmark.md.
-```
-
-The agent should first inspect the actual repository, current state, relevant issues/PRs, tests, docs, deployment evidence, competition requirements, and live integration status when accessible.
+When asked to compare a project against this benchmark, first inspect the actual repository, current state, relevant issues/PRs, tests, docs, live integrations/deployments, and the real competition/user requirements when accessible.
 
 Then return:
 
@@ -858,7 +731,7 @@ XX/100
 2. ...
 
 ## Do NOT change
-- Existing strengths or architectural decisions that should be preserved.
+- Existing strengths or settled decisions that should be preserved.
 
 ## Recommended next moves
 1. Highest-value action
@@ -868,81 +741,80 @@ XX/100
 ## Demo / proof opportunity
 The strongest adversarial, measurable, or independently verifiable demonstration currently available.
 
-## Rubric / user impact
-Exactly which requirement or user outcome each recommendation improves.
+## Requirement / user impact
+Exactly which criterion or user outcome each recommendation improves.
 ```
 
-The benchmark review should be specific to the current repository. Generic advice is a failure.
+Generic advice is a failed benchmark review.
 
 ---
 
-# 24. Rules for modifying a build after benchmarking
+# 19. Rules for modifying a build after benchmarking
 
-If the user asks the agent to **improve the build using this benchmark**, the agent should:
+If asked to improve the build using this benchmark:
 
 1. read `goated_foundation.md` if present;
-2. read the target project's `AGENTS.md`, `PROJECT_STATE.md`, current sprint, requirements/rubric, and relevant architecture docs;
-3. inspect current code, tests, issues, PRs, and real integration evidence;
+2. read the target project's agent rules, current state, current sprint, requirements/rubric, and relevant architecture docs;
+3. inspect actual code, tests, issues, PRs, and real integration evidence;
 4. identify the highest-leverage benchmark gaps;
 5. preserve settled architecture unless evidence justifies changing it;
-6. convert improvements into bounded issues/acceptance criteria when the project foundation uses that workflow;
-7. implement incrementally on focused branches;
+6. convert justified improvements into bounded work with acceptance criteria;
+7. implement incrementally;
 8. test success and meaningful failure paths;
-9. record benchmark/evidence results;
-10. re-score honestly after the improvement.
+9. record evidence/benchmark results;
+10. re-score honestly.
 
-Do not perform a wholesale rewrite unless the current architecture fundamentally prevents the core product claim and the evidence supports that conclusion.
+Do not perform a wholesale rewrite unless the current architecture fundamentally blocks the product's core claim and the evidence supports that conclusion.
 
 ---
 
-# 25. Anti-patterns
+# 20. Anti-patterns
 
 Avoid:
 
 - sponsor-logo integrations;
 - “AI-powered” as the main differentiation;
 - dashboards hiding an incomplete core workflow;
-- fake production-readiness;
 - mocked integrations presented as real;
-- self-certifying verification systems with no independent check;
-- random blockchain hashes with no enforcement or user value;
+- fake production-readiness;
+- self-certifying verification with no independent check where one is practical;
+- random blockchain hashes with no enforcement/user value;
 - arbitrary multi-agent architectures;
 - impressive test counts that do not test important claims;
 - benchmark numbers with no reproducible procedure;
-- adding security theater unrelated to the threat model;
-- chasing every possible failure instead of the meaningful ones;
+- security theater unrelated to the threat model;
+- chasing every theoretical failure instead of meaningful ones;
 - shipping ten mediocre features instead of one undeniable core mechanic;
-- changing working architecture merely because another winner used something different;
-- copying another winning product's domain-specific mechanism without the underlying need.
+- changing working architecture because another winner used something different;
+- copying a winner's domain-specific mechanism without the underlying need.
 
 ---
 
-# 26. Pre-submission / pre-release pressure test
+# 21. Final pressure test
 
-Before a consequential demo, launch, release, or hackathon submission, answer:
+Before a consequential demo, launch, release, or submission, answer:
 
 - Can a stranger explain the product after one minute?
 - Is the core problem real and specific?
-- Is our differentiation structural or merely cosmetic?
+- Is the differentiation structural rather than cosmetic?
 - Does the central workflow work end to end without hidden mocks?
-- Are sponsor/platform features genuinely load-bearing where relevant?
-- What is the most important claim we currently ask people to trust?
-- Can we prove that claim instead?
-- What realistic failure would make us look foolish if it happened during judging?
+- Are required sponsor/platform features genuinely load-bearing where relevant?
+- What important claim are we still asking people to trust?
+- Can we prove it instead?
+- Is there a clear authority boundary before consequential output/action where needed?
+- What realistic failure would embarrass the product during judging or production?
 - Have we tested it?
-- What is our memorable quantitative result?
-- Can that result be reproduced?
-- What is our strongest receipt/evidence artifact?
+- What is the memorable quantitative result, and can it be reproduced?
+- What receipt/evidence remains after a successful run?
 - Does the demo expose the core technical insight quickly?
-- Can the judge map the build directly to the scoring rubric?
-- Are we overclaiming anything?
+- Can a judge map the product directly to the scoring rubric?
 - What should we deliberately **not** add before the deadline?
 
 ---
 
-# 27. Living benchmark protocol
+# 22. Living benchmark protocol
 
-This file is expected to evolve as more strong products, failures, competition results, postmortems, and winning patterns are studied.
+This file should evolve as strong products, failures, postmortems, competition results, and winning patterns are studied.
 
 When adding a new benchmark reference:
 
@@ -951,43 +823,19 @@ When adding a new benchmark reference:
 3. distinguish fact from inference;
 4. extract the reusable principle;
 5. avoid copying domain-specific implementation details unless they generalize;
-6. add or refine a benchmark criterion only if it improves future product decisions;
-7. remove stale rules that create bloat without predictive value.
+6. add/refine a criterion only if it improves future product decisions;
+7. remove stale or repetitive rules that create context bloat without predictive value.
 
 A new winner should not automatically create a new rule.
 
-The benchmark should improve through **signal accumulation**, not checklist accumulation.
-
----
-
-# 28. The final Goated test
-
-A strong build should increasingly be able to answer yes to these questions:
-
-```text
-Do we solve a sharp real problem?
-Do we have a memorable reason to exist?
-Does the architecture directly support that reason?
-Does the required platform/sponsor technology matter to the product?
-Does the core flow work for real?
-Can we survive at least the important failure paths?
-Can we prove the claims that matter?
-Can we quantify the advantage?
-Can another person reproduce or inspect the evidence?
-Can we demonstrate all of this quickly?
-Did we avoid unnecessary complexity while doing it?
-```
-
-If yes, the product is not merely more feature-complete.
-
-It is becoming **harder to dismiss**.
+> **Accumulate signal, not checklist length.**
 
 ---
 
 # Invocation examples
 
 ```text
-Compare our current build against goated_benchmark.md. Do not rewrite the product. Identify the highest-leverage gaps, preserve what is already strong, and tell me the smallest changes that would materially improve our score, proof, demo, and chances of winning.
+Compare our current build against goated_benchmark.md. Do not rewrite the product. Identify the highest-leverage gaps, preserve what is already strong, and tell me the smallest changes that would materially improve our proof, demo, product quality, and chances of winning.
 ```
 
 ```text
